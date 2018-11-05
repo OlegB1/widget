@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {FormBuilder, Validators, FormControl} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {BsLocaleService} from 'ngx-bootstrap';
 
 function luhnAlgorithm(val: FormControl) {
   const num = val.value;
@@ -39,10 +40,11 @@ export class PaymentFormComponent implements OnInit {
   });
   public minDate = new Date();
 
-  constructor(private fb: FormBuilder, private toaster: ToastrService) {
+  constructor(private fb: FormBuilder, private toaster: ToastrService, private localeService: BsLocaleService) {
   }
 
   ngOnInit() {
+    this.localeService.use('en');
     const day = this.minDate.getDate();
     this.minDate.setDate(day + 1);
   }
@@ -52,12 +54,10 @@ export class PaymentFormComponent implements OnInit {
       this.toaster.success('Successful!');
     } else {
       this.toaster.error('Error filling form!');
-      setTimeout(() => {
-        (<any>Object).values(this.paymentForm.controls).forEach((control: FormControl) => {
-          control.markAsTouched();
-          control.markAsDirty();
-        });
-      }, 500);
+      Object.values(this.paymentForm.controls).forEach((control: FormControl) => {
+        control.markAsTouched();
+        control.markAsDirty();
+      });
     }
   }
 
@@ -75,7 +75,6 @@ export class PaymentFormComponent implements OnInit {
   onChangeDate(inputEl: HTMLElement) {
     setTimeout(() => {
       inputEl.classList.remove('input-success', 'input-error');
-
     }, 0);
   }
 }
