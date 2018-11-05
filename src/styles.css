@@ -57,6 +57,7 @@ app-country-selector label, app-payment-selector label {
 
 .right{
   float: right;
+  margin-top: 10px;
 }
 
 .form-control:disabled, .form-control[readonly] {
