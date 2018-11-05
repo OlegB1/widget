@@ -1,3 +1,5 @@
+ngx-bootstrap/datepicker
+
 tslib
 Apache-2.0
 Apache License
@@ -312,8 +314,6 @@ ngx-bootstrap/mini-ngrx
 ngx-bootstrap/loader
 
 ngx-bootstrap/positioning
-
-ngx-bootstrap/datepicker
 
 ngx-toastr
 MIT
