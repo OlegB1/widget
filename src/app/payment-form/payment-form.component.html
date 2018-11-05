@@ -1,0 +1,78 @@
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+  <h3>Card form</h3>
+  <div class="row align-items-center">
+    <div class="col-md-6 col-sm-12">
+      <div class="row align-items-center setMergeForError">
+        <div class="col-4">
+          <label>Holder name</label>
+        </div>
+        <div class="col-8">
+          <input type="text" formControlName="cardholder" class="form-control" appValidationMessage
+                 [inputEl]="paymentForm.controls['cardholder']">
+        </div>
+        <div class="col-12 error-message">
+          <span *ngIf="typeError('cardholder')">Please provide holder name</span>
+          <span *ngIf="requiredError('cardholder')">Holder name is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="row align-items-center">
+        <div class="col-4">
+          <label>Card number</label>
+        </div>
+        <div class="col-8">
+          <input type="text" formControlName="card" class="form-control" appValidationMessage
+                 [inputEl]="paymentForm.controls['card']">
+        </div>
+
+        <div class="col-12 error-message">
+          <span *ngIf="typeError('card')">Please provide card number</span>
+          <span *ngIf="requiredError('card')">Card number is required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-md-6 col-sm-12">
+      <div class="row align-items-center">
+        <div class="col-4">
+          <label>Expiry date</label>
+        </div>
+        <div class="col-8">
+          <input readonly #input
+                 appValidationMessage
+                 formControlName="exp"
+                 [inputEl]="paymentForm.controls['exp']"
+                 class="form-control"
+                 [minDate]="minDate"
+                 bsDatepicker
+                 (bsValueChange)="onChangeDate(input)"
+                 [outsideClick]="true"
+                 [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-blue'}"
+                 placement="top">
+        </div>
+        <div class="col-12 error-message">
+          <span *ngIf="requiredError('exp')">Expiry date is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="row align-items-center">
+        <div class="col-4">
+          <label>CVV</label>
+        </div>
+        <div class="col-8">
+          <input type="text" formControlName="cvv" class="form-control" appValidationMessage
+                 [inputEl]="paymentForm.controls['cvv']">
+        </div>
+
+        <div class="col-12 error-message">
+          <span *ngIf="typeError('cvv')">Please provide CVV</span>
+          <span *ngIf="requiredError('cvv')">CVV is required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success right">Pay {{currencyAmount}}</button>
+</form>

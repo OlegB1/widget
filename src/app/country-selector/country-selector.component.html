@@ -1,0 +1,14 @@
+<div class="row align-items-center">
+  <div class="col-4 ">
+    <label for="coutries">County</label>
+  </div>
+  <div class="col-8">
+    <ng-select [items]="countries"
+               bindLabel="name"
+               bindValue="code"
+               [(ngModel)]="selectedCountry"
+               [clearable]="false"
+               id="coutries"
+               (change)="changeCoumtry($event)"></ng-select>
+  </div>
+</div>
